@@ -8,7 +8,7 @@ Genetic::Genetic(Instance *instance,int popsize, float ncross, float nmut,  int 
     this->MaxIt = maxit;
     this->nc = (int)(popsize*ncross);
     this->nm = (int)(popsize*nmut);
-    this->Nils = 50;
+    this->Nils = 10;
     if (this->nc%2){
         this->nc++;
     }

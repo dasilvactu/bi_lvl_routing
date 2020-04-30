@@ -2,7 +2,7 @@
 
 
 Genetic::Genetic(Instance *instance,int popsize, float ncross, float nmut,  int maxit){
-    this->Nils = 50;
+    this->Nils = 10;
     this->NCross = ncross;
     this->NMut = nmut;
     this->PopSize = popsize;

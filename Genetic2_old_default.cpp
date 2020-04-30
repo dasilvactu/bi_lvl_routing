@@ -8,7 +8,7 @@ Genetic2::Genetic2(Instance *instance,int popsize, float ncross, float nmut,  in
     this->nc = (int)(popsize*ncross);
     this->nm = (int)(popsize*nmut);
     this->tot = popsize+2;
-    this->Nils = 50;
+    this->Nils = 10;
     this->population = new Individual*[this->tot];
 	this->instance = instance;
 }
