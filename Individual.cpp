@@ -46,37 +46,37 @@ Individual::Individual(Individual * ind){
 	this->NStudents = ind->getNStudents();
 	this->fitnessLVL1 = ind->getFitness();
 	this->fitnessLVL2 = ind->getLVL2();
-	y = new int*[NStations];
+	this->y = new int*[NStations];
 	for (int i = 0; i < NStations; i++) {
-		y[i] = new int[Kbus];
+		this->y[i] = new int[Kbus];
 		for (int k = 0; k < Kbus; k++) {
-			y[i][k] = ind->getY()[i][k];
+			this->y[i][k] = ind->getY()[i][k];
 		}
 	}
 
-	z = new int**[NStations];
+	this->z = new int**[NStations];
 	for (int i = 0; i < NStations; i++) {
-		z[i] = new int*[NStudents];
+		this->z[i] = new int*[NStudents];
 		for (int l = 0; l < NStudents; l++) {
-			z[i][l] = new int[Kbus];
+			this->z[i][l] = new int[Kbus];
 			for (int k = 0; k < Kbus; k++) {
-				z[i][l][k] = ind->getZ()[i][l][k];
+				this->z[i][l][k] = ind->getZ()[i][l][k];
 			}
 		}
 	}
-	tour = new int*[Kbus];
-	sizeTour = new int[Kbus];
+	this->tour = new int*[Kbus];
+	this->sizeTour = new int[Kbus];
     for(int k= 0; k<Kbus; k++){
-		sizeTour[k] = ind->getSizeTour(k);
-        tour[k] =  new int[sizeTour[k]];
+		this->sizeTour[k] = ind->getSizeTour(k);
+        this->tour[k] =  new int[this->sizeTour[k]];
         for(int i=0; i<sizeTour[k]; i++){
-            tour[k][i] = ind->getTour()[k][i];
+            this->tour[k][i] = ind->getTour()[k][i];
 
         }
     }
-    gene = new int[NStations];
+    this->gene = new int[NStations];
     for (int i = 0; i < NStations; i++) {
-        gene[i] = ind->gene[i];
+        this->gene[i] = ind->gene[i];
     }
 }
 

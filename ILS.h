@@ -10,6 +10,8 @@ class ILS{
 public:
     ILS(int it);
     void run(Individual *ind, Instance *instance);
+    void perturbation(int qtd,int n,int k, Individual *current);
+    void localSearch(Individual **localSearch,Individual *current, int n, int k, Instance *instance);
 };
 
 #endif // ILS_H_INCLUDED
