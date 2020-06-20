@@ -7,6 +7,23 @@ bool sortInd(Individual* a, Individual* b) {
 	return a->getTourCost() <b->getTourCost();
 }
 
+int* insertValue (int* originalArray, int positionToInsertAt,int originalPosition, int ValueToInsert, int sizeOfOriginalArray){
+	vector<int> newArray;
+	for(int i = 0; i<sizeOfOriginalArray;i++){
+		if(originalArray[i]!=ValueToInsert){
+			newArray.push_back(originalArray[i]);
+		}
+		
+	}
+	newArray.insert(newArray.begin()+positionToInsertAt,ValueToInsert);
+	int * retorno = new int[sizeOfOriginalArray];
+	for(int i = 0; i<sizeOfOriginalArray; i++){
+		retorno[i] = newArray[i];
+	} 
+	newArray.clear();
+	return retorno;
+}
+
 void ILS::perturbation(int qtd, int n,int k, Individual *current){
 	for(int j=0;j<qtd; j++){
 		int a = rand()%n;
@@ -19,31 +36,13 @@ void ILS::perturbation(int qtd, int n,int k, Individual *current){
 }
 
 void ILS::localSearch(Individual **localSearch,Individual *current, int n, int k,Instance *instance){
+	int position = rand()%n; // position removed
+	int value = current->getTour()[k][position];
 	for(int j= 0; j< n; j++){
 		localSearch[j] = new Individual(current);
-		int position = rand()%n; // position removed
-		vector<int> tour;
-		for (int t= 0; t<n;t++){
-			if (t==j){
-				tour.push_back(localSearch[j]->getTour()[k][position]);
-			}
-			if (t!=position){
-				tour.push_back(localSearch[j]->getTour()[k][t]);
-			}
-		}
-		//cout<<"Tour: ";
-		//for (int t= 0; t<n;t++){
-			//cout<<tour.at(t)<<" - ";
-		//}
-		//cout<<endl;
-		localSearch[j]->swapRoute(tour,k);
-		tour.clear();
-		//swap(localSearch[j]->getTour()[k][j],localSearch[j]->getTour()[k][position]);
-		float val = localSearch[j]->calcTourCost(instance,k);
-		
-		//cout<<"ind "<< j<< "  cost: "<<val <<" Route:";
-		//localSearch[j]->printX();
-		//cout<<endl;
+		int* newTour = insertValue(localSearch[j]->getTour()[k],j,position,value,n);
+		localSearch[j]->swapRoute(newTour,k);
+		delete newTour;
 	}
 }
 

@@ -128,10 +128,10 @@ void Genetic2::Evolve(){
             population[i] = new Individual(population[a]);
             population[i + 1] = new Individual(population[b]);
 			TwoPointCX2(population[a],population[b],population[i],population[i+1]);
-			population[i]->tourConstructZ();
-			population[i+1]->tourConstructZ();
             solver->PopRows(population[i]);
             solver->PopRows(population[i+1]);
+			population[i]->tourConstructZ();
+			population[i+1]->tourConstructZ();
             ILS *ils = new ILS(this->Nils);
             ils->run(population[i],instance);
             population[i]->evaluate(instance);

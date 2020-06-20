@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
 	Instance *instancia = new Instance(20,6000,5,6000);
 	instancia->readFile("instances/SBRP1Bus01.txt");
-	Genetic2 *genetic  = new Genetic2(instancia,10,0.7,0.4,5);
+	Genetic2 *genetic  = new Genetic2(instancia,4,0.7,0.4,2);
 	genetic->Evolve();
 	Individual *ind = genetic->getBest();
 	ind->printX();

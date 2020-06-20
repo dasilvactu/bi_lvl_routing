@@ -8,7 +8,7 @@ Genetic2::Genetic2(Instance *instance,int popsize, float ncross, float nmut,  in
     this->nc = (int)(popsize*ncross);
     this->nm = (int)(popsize*nmut);
     this->tot = popsize+2;
-    this->Nils = 10;
+    this->Nils = 2;
     this->population = new Individual*[this->tot];
 	this->instance = instance;
 }
@@ -62,7 +62,6 @@ void Genetic2::TwoPointCX2(Individual *p1, Individual *p2, Individual *f1, Indiv
         cut2 = cut1;
         cut1 = aux;
     }
-    
     for(int i = 0; i<range; i++){
         if(i>cut1 && i<cut2){
             f1->getGene()[i] = p2->getGene()[i];
@@ -106,10 +105,8 @@ void Genetic2::Evolve(){
     for(int i=0; i<PopSize; i++){
         solver->PopRows(population[i]);
         population[i]->tourConstructZ();
-		
-        ILS *ils = new ILS(50);
+        ILS *ils = new ILS(this->Nils);
 		ils->run(population[i],instance);
-		
 		population[i]->evaluate(instance);
 		delete ils;
     }
@@ -123,15 +120,15 @@ void Genetic2::Evolve(){
     	TwoPointCX2(population[a],population[b],population[i],population[i+1]);
     	Mutation2(population[a],population[i]);
     	Mutation2(population[b],population[i+1]);
-        population[i]->tourConstructZ();
-    	population[i+1]->tourConstructZ();
         solver->PopRows(population[i]);
         solver->PopRows(population[i+1]);
+        population[i]->tourConstructZ();
+    	population[i+1]->tourConstructZ();
         ILS *ils = new ILS(this->Nils);
         ils->run(population[i],instance);
         population[i]->evaluate(instance);
     	delete ils;
-    	ILS *ils2 = new ILS(this->Nils);
+        ILS *ils2 = new ILS(this->Nils);
     	ils2->run(population[i+1],instance);
     	population[i+1]->evaluate(instance);
     	delete ils2;

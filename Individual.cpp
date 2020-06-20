@@ -88,7 +88,6 @@ void Individual::constructY(){
         }
     }
 
-
 }
 void Individual::tourConstructZ(){
     for(int pos=0; pos<Kbus; pos++){
@@ -268,13 +267,13 @@ int Individual::getNStations(){
     return this->NStations;
 }
 void Individual::printY(){
-    for (int i =0; i<NStations; i++){
-        for (int k=0;k<Kbus; k++){
+    cout<<"Y: ";
+    for (int k=0;k<Kbus; k++){
+        for (int i =0; i<NStations; i++){
             cout<<" "<<y[i][k]<<" ";
         }
         cout<<endl;
     }
-    cout<<endl;
 }
 
 void Individual::printZ(){
@@ -300,6 +299,20 @@ void Individual::printX(){
     }
 
 
+}
+
+void Individual::printGene(){
+    cout<<"Gene: [";
+    for (int i =0; i<NStations; i++){
+        cout<<this->gene[i]<<" ";
+    }
+    cout<<"]"<<endl;
+}
+
+void Individual::printAll(){
+    printGene();
+    printY();
+    printX();
 }
 Individual::~Individual(){
     for (int i =0; i<NStations; i++){

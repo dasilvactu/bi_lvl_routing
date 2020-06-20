@@ -35,6 +35,8 @@ public:
     void printY();
     void printZ();
     void printX();
+    void printGene();
+    void printAll();
 	int** getTour();
     int** getY();
     int*** getZ();
